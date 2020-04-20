@@ -27,22 +27,36 @@ runs only the MongoDB instance, in case you want to run the applications without
 
 ### How to run the project
 
-### MongoDB
+#### MongoDB
 
 * Go to `docker` folder
 
 * Run `docker-compose up`
 
-### Spring-boot app
+#### Spring-boot app
 
 * Go to `spring-boot-reactive-web` folder
 
 * Run `./mvnw spring-boot:run`
 
-### Angular app
+#### Angular app
 
 * Go to `angular-reactive` folder
 
 * Run `npm install`
 
 * Run `npm run ng serve` then go to `http://localhost:4200/`
+
+### Your test
+
+After getting the quotes from MongoDB, there is a "Delete" button in the actions column on the right side.
+
+Your goals are:
+
+* to create a new git branch called "feature/delete-quote-solution"
+
+* to code the "Delete" REST API in backend in order to remove a quote from MongoDB
+
+* to code the JUnit test for "Delete" REST controller
+
+* to link the REST API to the delete button in the frontend app
