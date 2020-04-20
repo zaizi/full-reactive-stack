@@ -7,12 +7,19 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  <link rel="stylesheet" href="assets/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 </head>
 <body>
-  <a href="https://thepracticaldeveloper.com"><img src="assets/logo.png"/></a>
+  <a href="https://www.zaizi.com" target="_blank"><img src="assets/zaizi-logo.png" width="5%" height="5%"/></a>
+  <h1>The application</h1>
+  <p>
+    To showcase the reactive capabilities, a client web application receives quotes from the book Don Quixote stored in a MongoDB instance.<br/>
+    Instead of just asking for the quotes using a standard blocking call (REST call), you’ll open a Server-Sent Events channel.
+    The backend application will send these events once there is a subscriber (our client application).<br />
+    <img src="assets/reactive_overview.png" width="50%" height="50%"/>
+  </p>
   <app-quotes></app-quotes>
 </body>
 </html>
