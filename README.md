@@ -45,4 +45,4 @@ runs only the MongoDB instance, in case you want to run the applications without
 
 * Run `npm install`
 
-* Run `npm run ng serve`
+* Run `npm run ng serve` then go to `http://localhost:4200/`
