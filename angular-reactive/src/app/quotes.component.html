@@ -3,7 +3,7 @@
     <p>
       <label>Pagination:
         <input type="checkbox" [checked]="pagination" (change)="pagination = !pagination" >
-        <label>Page #: 
+        <label>Page #:
           <input type="text" [(ngModel)]="page" size="2">
         </label>
         <label>Page Size:
@@ -19,6 +19,7 @@
         <th>Quote ID</th>
         <th>Book</th>
         <th>Quote content</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
         <td>{{quote.id}}</td>
         <td>{{quote.book}}</td>
         <td>{{quote.content.substr(0, 30)}}...</td>
+        <td><button (click)="deleteQuote()">Delete</button></td>
       <tr>
       </tbody>
     </table>
