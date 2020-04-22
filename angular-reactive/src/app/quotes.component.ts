@@ -47,6 +47,7 @@ export class QuotesComponent {
   }
 
   deleteQuote(): void {
-
+    this.quoteReactiveService.deleteQuote(this.selectedQuote);
+    this.selectedQuote = null;
   }
 }

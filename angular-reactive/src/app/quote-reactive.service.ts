@@ -30,4 +30,9 @@ export class QuoteReactiveService {
     });
   }
 
+  deleteQuote(quote: Quote) {
+    let url = this.url + "/" + quote.id;
+    let eventSource = new EventSource(url);
+    // TODO - how to send the eventsource as a delete
+  }
 }
