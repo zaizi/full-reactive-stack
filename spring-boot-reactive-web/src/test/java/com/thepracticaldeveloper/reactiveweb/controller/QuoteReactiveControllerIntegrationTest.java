@@ -10,14 +10,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
@@ -93,6 +98,26 @@ public class QuoteReactiveControllerIntegrationTest {
                 .expectComplete()
                 .verify();
 
+    }
+
+    @Test
+    public void shouldDeleteQuoteGivenValidId() {
+        // Given
+        String id = "3";
+        Mono<Quote> quoteToDelete = quoteFlux.elementAt(2);
+        given(quoteMongoReactiveRepository.findById(id))
+            .willReturn(quoteToDelete);
+
+        String url = "/quotes-reactive/" + id;
+
+        // When
+        Mono<Void> response = webClient.delete().uri(url)
+            .accept(MediaType.TEXT_EVENT_STREAM)
+            .exchange()
+            .then();
+
+        // Then
+        // TODO - Not quite sure what to assert here
     }
 
 }

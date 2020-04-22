@@ -15,13 +15,20 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.never;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,6 +58,19 @@ public class QuoteBlockingControllerIntegrationTest {
                 new Quote("2", "mock-book", "Quote 2"),
                 new Quote("3", "mock-book", "Quote 3"),
                 new Quote("4", "mock-book", "Quote 4"));
+
+        restTemplate.setErrorHandler(new ResponseErrorHandler() {
+            // NO-OP error handler so that we can assert client errors such as 404
+            @Override
+            public boolean hasError(final ClientHttpResponse clientHttpResponse) throws IOException {
+                return false;
+            }
+
+            @Override
+            public void handleError(final ClientHttpResponse clientHttpResponse) throws IOException {
+
+            }
+        });
     }
 
     @Test
@@ -89,5 +109,47 @@ public class QuoteBlockingControllerIntegrationTest {
         assertThat(receivedQuoteList.getBody()).isEqualTo(
                 Lists.newArrayList(new Quote("1", "mock-book", "Quote 1"),
                         new Quote("2", "mock-book", "Quote 2")));
+    }
+
+    @Test
+    public void shouldDeleteQuoteGivenValidId() {
+        // Given
+        String id = "3";
+        Quote quoteToDelete = quoteList.stream().filter(quote -> quote.getId().equals(id)).findFirst().get();
+
+        given(quoteMongoBlockingRepository.findById(id))
+            .willReturn(Optional.of(quoteToDelete));
+
+        String url = serverBaseUrl + "/quotes-blocking/" + id;
+
+        // When
+        ResponseEntity<Void> response = restTemplate.exchange(
+            url, HttpMethod.DELETE, null, Void.class);
+
+        // Then
+        assertThat(response.getStatusCode())
+            .as("HTTP status is 204")
+            .isEqualTo(HttpStatus.NO_CONTENT);
+        then(quoteMongoBlockingRepository).should().delete(quoteToDelete);
+    }
+
+    @Test
+    public void shouldDeleteQuoteGivenInvalidId() {
+        // Given
+        String id = "13";
+        given(quoteMongoBlockingRepository.findById(id))
+            .willReturn(Optional.empty());
+
+        String url = serverBaseUrl + "/quotes-blocking/" + id;
+
+        // When
+        ResponseEntity<Void> response = restTemplate.exchange(
+            url, HttpMethod.DELETE, null, Void.class);
+
+        // Then
+        assertThat(response.getStatusCode())
+            .as("HTTP status is 404")
+            .isEqualTo(HttpStatus.NOT_FOUND);
+        then(quoteMongoBlockingRepository).should(never()).delete(any(Quote.class));
     }
 }

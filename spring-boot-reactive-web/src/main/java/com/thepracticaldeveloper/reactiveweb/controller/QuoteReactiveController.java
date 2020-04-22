@@ -3,10 +3,13 @@ package com.thepracticaldeveloper.reactiveweb.controller;
 import com.thepracticaldeveloper.reactiveweb.domain.Quote;
 import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoReactiveRepository;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
@@ -32,6 +35,12 @@ public class QuoteReactiveController {
                                     final @RequestParam(name = "size") int size) {
         return quoteMongoReactiveRepository.retrieveAllQuotesPaged(PageRequest.of(page, size))
                 .delayElements(Duration.ofMillis(DELAY_PER_ITEM_MS));
+    }
+
+    @DeleteMapping("/quotes-reactive/{id}")
+    public Mono<Void> deleteQuote(@PathVariable("id") String id) {
+        return quoteMongoReactiveRepository.findById(id)
+            .flatMap(quote -> quoteMongoReactiveRepository.delete(quote));
     }
 
 }
