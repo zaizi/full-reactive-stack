@@ -53,7 +53,7 @@ After getting the quotes from MongoDB, there is a "Delete" button in the actions
 
 Your goals are:
 
-* to create a new git branch called "feature/delete-quote-solution"
+* to create a new git branch called "feature/delete-quote-solution" from branch "feature/delete-quote"
 
 * to code the "Delete" REST API in backend in order to remove a quote from MongoDB
 
