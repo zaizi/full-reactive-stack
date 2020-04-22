@@ -45,4 +45,8 @@ export class QuotesComponent {
   onSelect(quote: Quote): void {
     this.selectedQuote = quote;
   }
+
+  deleteQuote(): void {
+
+  }
 }
