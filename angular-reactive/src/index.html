@@ -7,12 +7,30 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  <link rel="stylesheet" href="assets/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 </head>
 <body>
-  <a href="https://thepracticaldeveloper.com"><img src="assets/monkey_v2_white_120.png"/></a>
+  <a href="https://www.zaizi.com" target="_blank"><img src="assets/zaizi-logo.png" width="5%" height="5%"/></a>
+  <h1>The application</h1>
+  <p>
+    To showcase the reactive capabilities, a client web application receives quotes from the book Don Quixote stored in a MongoDB instance.<br/>
+    Instead of just asking for the quotes using a standard blocking call (REST call), you’ll open a Server-Sent Events channel.
+    The backend application will send these events once there is a subscriber (our client application).<br />
+    <img src="assets/reactive_overview.png" width="50%" height="50%"/>
+  </p>
+  <h2>Your Test</h2>
+  <p>
+    After getting the quotes from MongoDB, there is a "Delete" button in the actions column on the right side.<br />
+    Your goals are:
+    <ul>
+      <li>to create a new git branch called "feature/delete-quote-solution"</li>
+      <li>to code the "Delete" REST API in backend in order to remove a quote from MongoDB</li>
+      <li>to code the JUnit test for "Delete" REST controller</li>
+      <li>to link the REST API to the delete button in the frontend app</li>
+    </ul>
+  </p>
   <app-quotes></app-quotes>
 </body>
 </html>
