@@ -53,6 +53,8 @@ After getting the quotes from MongoDB, there is a "Delete" button in the actions
 
 Your goals are:
 
+* to fork this github project to your github account
+
 * to create a new git branch called "feature/delete-quote-solution" from branch "feature/delete-quote"
 
 * to code the "Delete" REST API in backend in order to remove a quote from MongoDB
@@ -60,3 +62,5 @@ Your goals are:
 * to code the JUnit test for "Delete" REST controller
 
 * to link the REST API to the delete button in the frontend app
+
+* to send us over the link to your github branch
