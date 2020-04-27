@@ -53,12 +53,12 @@ public class QuoteDeleteControllerIntegrationTest {
     public void simpleGetRequest() {
         // given
         Map<String, String> requestParams = new HashMap<>();
-        requestParams.put("quoteId", "Quote 2");
+        requestParams.put("quoteId", "2");
 
         // when
         restTemplate.delete(serverBaseUrl + "/quotes-delete?", requestParams);
 
         // then
-        verify(quoteMongoReactiveRepository).deleteById("Quote 2");
+        verify(quoteMongoReactiveRepository).deleteById("2");
     }
 }

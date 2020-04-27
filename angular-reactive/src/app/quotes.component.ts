@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 
 import { Quote } from './quote';
 import { QuoteReactiveService } from './quote-reactive.service';
+import { QuoteDeleteService } from './quote-delete.service';
 import { QuoteBlockingService } from './quote-blocking.service';
 
 import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-component-quotes',
-  providers: [QuoteReactiveService],
+  providers: [QuoteReactiveService, QuoteDeleteService],
   templateUrl: './quotes.component.html'
 })
 export class QuotesComponent {
@@ -19,7 +20,7 @@ export class QuotesComponent {
   page: number;
   size: number;
 
-  constructor(private quoteReactiveService: QuoteReactiveService, private quoteBlockingService: QuoteBlockingService) {
+  constructor(private quoteReactiveService: QuoteReactiveService, private quoteBlockingService: QuoteBlockingService, private quoteDeleteService: QuoteDeleteService) {
     this.mode = "reactive";
     this.pagination = true;
     this.page = 0;
@@ -46,7 +47,7 @@ export class QuotesComponent {
     this.selectedQuote = quote;
   }
 
-  deleteQuote(): void {
-
+  deleteQuote(quoteId: number): void {
+    this.quoteDeleteService.deleteQuote(quoteId);
   }
 }
