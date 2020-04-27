@@ -11,7 +11,7 @@ export class QuoteDeleteService {
   constructor(private http: HttpClient) {}
 
   deleteQuote (quoteId: number): Observable<{}> {
-    const url = `${this.url}`; // DELETE api/heroes/42
+    const url = `${this.url}`;
     const httpParams = new HttpParams().set('quoteId', quoteId.toString());
     const options = { params: httpParams };
     return this.http.delete(url, options);
