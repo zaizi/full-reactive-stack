@@ -16,6 +16,7 @@ public class QuoteDeleteController {
 
     @DeleteMapping("/quotes-delete")
     public void deleteQuote(final @RequestParam(name = "quoteId") String quoteId) throws Exception {
+        System.out.println("Deleting now quoteId" + quoteId);
         quoteMongoReactiveRepository.deleteById(quoteId);
     }
 

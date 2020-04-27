@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.verify;
@@ -36,8 +35,6 @@ public class QuoteDeleteControllerIntegrationTest {
 
     private String serverBaseUrl;
 
-    private List<Quote> quoteList;
-
     @Before
     public void setUp() {
         serverBaseUrl = "http://localhost:" + serverPort;
@@ -45,7 +42,7 @@ public class QuoteDeleteControllerIntegrationTest {
     }
 
     @Test
-    public void simpleGetRequest() {
+    public void deleteRequest() {
         // given
         Map<String, String> requestParams = Collections.singletonMap("quoteId", "2");
 
