@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { QuoteReactiveService } from './quote-reactive.service';
 import { QuoteBlockingService } from './quote-blocking.service';
+import { QuoteDeleteService } from './quote-delete.service';
 import { AppComponent } from './app.component';
 import { QuotesComponent } from './quotes.component';
 import { QuoteDetailComponent } from './quote-detail.component';
@@ -22,7 +23,8 @@ import { QuoteDetailComponent } from './quote-detail.component';
   ],
   providers: [
     QuoteReactiveService,
-    QuoteBlockingService
+    QuoteBlockingService,
+    QuoteDeleteService
   ],
   bootstrap: [AppComponent]
 })

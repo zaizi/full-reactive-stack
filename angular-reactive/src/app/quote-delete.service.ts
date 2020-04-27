@@ -10,7 +10,7 @@ export class QuoteDeleteService {
   constructor(private http: HttpClient) {}
 
   deleteQuote(quoteId?: number) {
-    return this.http.delete(this.url + '?quoteId' + quoteId);
+    return this.http.delete(this.url + '?quoteId=' + quoteId);
   }
 
 }
