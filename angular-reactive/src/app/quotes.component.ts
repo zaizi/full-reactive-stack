@@ -48,7 +48,7 @@ export class QuotesComponent {
   }
 
   deleteQuote(quoteId: number): void {
-    this.quoteDeleteService.deleteQuote(quoteId);
+    this.quoteDeleteService.deleteQuote(quoteId).subscribe();
     this.selectedQuote = null;
     this.requestQuoteStream();
   }
