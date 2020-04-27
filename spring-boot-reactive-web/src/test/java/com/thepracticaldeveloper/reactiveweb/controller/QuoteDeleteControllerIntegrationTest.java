@@ -46,7 +46,7 @@ public class QuoteDeleteControllerIntegrationTest {
         Map<String, String> requestParams = Collections.singletonMap("quoteId", "2");
 
         // when
-        restTemplate.delete(serverBaseUrl + "/quotes-delete?", requestParams);
+        restTemplate.delete(serverBaseUrl + "/quotes-delete", requestParams);
 
         // then
         verify(quoteMongoReactiveRepository).deleteById("2");
