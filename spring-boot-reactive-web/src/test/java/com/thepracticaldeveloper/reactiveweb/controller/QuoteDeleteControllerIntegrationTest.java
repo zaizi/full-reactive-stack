@@ -2,7 +2,6 @@ package com.thepracticaldeveloper.reactiveweb.controller;
 
 import com.thepracticaldeveloper.reactiveweb.configuration.QuijoteDataLoader;
 import com.thepracticaldeveloper.reactiveweb.domain.Quote;
-import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoBlockingRepository;
 import com.thepracticaldeveloper.reactiveweb.repository.QuoteMongoReactiveRepository;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
@@ -11,11 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
@@ -64,11 +56,9 @@ public class QuoteDeleteControllerIntegrationTest {
         requestParams.put("quoteId", "Quote 2");
 
         // when
-       restTemplate.delete(serverBaseUrl + "/quotes-delete?", requestParams);
+        restTemplate.delete(serverBaseUrl + "/quotes-delete?", requestParams);
 
         // then
         verify(quoteMongoReactiveRepository).deleteById("Quote 2");
     }
-
-
 }
