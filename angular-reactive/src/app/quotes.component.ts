@@ -49,5 +49,6 @@ export class QuotesComponent {
 
   deleteQuote(quoteId: number): void {
     this.quoteDeleteService.deleteQuote(quoteId);
+    this.selectedQuote = null;
   }
 }

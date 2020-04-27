@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class QuoteDeleteService {
 
-  url: string = 'http://localhost:8080/quotes-delete';
+  url = 'http://localhost:8080/quotes-delete';
 
   constructor(private http: HttpClient) {}
 
